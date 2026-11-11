@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VisionAI — Image Classifier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="topbar">
+    <a class="brand" href="/">
+      <span class="brand-mark">V</span>
+      <span>vision<span class="brand-light">ai</span></span>
+    </a>
+    <span class="model-chip"><span class="live-dot"></span> MOBILENETV2 · IMAGENET</span>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro">
+      <div class="eyebrow"><span></span> AI-POWERED IMAGE RECOGNITION</div>
+      <h1>What's in your <span>image?</span></h1>
+      <p class="subtitle">Upload a picture and let our neural network identify what it sees. Fast, simple, and powered by deep learning.</p>
+    </section>
+
+    <section class="workspace">
+      <div class="upload-card" id="dropZone">
+        <div class="card-heading">
+          <div>
+            <p class="section-kicker">01 / INPUT</p>
+            <h2>Upload an image</h2>
+          </div>
+          <span class="step-icon">↗</span>
+        </div>
+
+        <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp" hidden>
+        <div class="drop-area" id="dropArea" tabindex="0" role="button" aria-label="Choose an image">
+          <div class="upload-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 16.5v2A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-2"/></svg>
+          </div>
+          <h3>Drop your image here</h3>
+          <p>or <button type="button" class="browse-button" id="browseButton">browse files</button></p>
+          <span class="file-hint">JPG, PNG or WEBP · MAX 10 MB</span>
+        </div>
+
+        <div class="preview-wrap hidden" id="previewWrap">
+          <img id="previewImage" alt="Selected image preview">
+          <div class="preview-meta">
+            <div><strong id="fileName">image.jpg</strong><span id="fileSize">0 KB</span></div>
+            <button type="button" class="remove-button" id="removeButton" aria-label="Remove image">×</button>
+          </div>
+        </div>
+
+        <button type="button" class="classify-button" id="classifyButton" disabled>
+          <span>Classify image</span><span class="button-arrow">→</span>
+        </button>
+        <p class="privacy-note"><span>▣</span> Your image is processed by this local app and is not stored.</p>
+      </div>
+
+      <div class="result-card">
+        <div class="card-heading">
+          <div>
+            <p class="section-kicker">02 / RESULT</p>
+            <h2>AI prediction</h2>
+          </div>
+          <span class="result-status" id="resultStatus">WAITING</span>
+        </div>
+
+        <div class="empty-state" id="emptyState">
+          <div class="scan-art">
+            <div class="scan-frame frame-a"></div>
+            <div class="scan-frame frame-b"></div>
+            <div class="scan-center">✳</div>
+            <span class="scan-line"></span>
+          </div>
+          <h3>Ready when you are</h3>
+          <p>Your prediction will appear here once you upload an image.</p>
+        </div>
+
+        <div class="loading-state hidden" id="loadingState">
+          <div class="loader"></div>
+          <h3>Analyzing image</h3>
+          <p>Our neural network is looking for patterns...</p>
+        </div>
+
+        <div class="results hidden" id="results">
+          <div class="primary-result">
+            <span class="result-label">I THINK THIS IS</span>
+            <h3 id="topLabel">Golden retriever</h3>
+            <div class="confidence-line"><span>Confidence</span><strong id="topConfidence">98.4%</strong></div>
+            <div class="progress-track"><div class="progress-fill" id="topProgress"></div></div>
+          </div>
+          <div class="other-heading"><span>OTHER POSSIBILITIES</span><span>TOP 5</span></div>
+          <div class="prediction-list" id="predictionList"></div>
+          <p class="model-note">Predictions are based on the ImageNet 1,000-class dataset.</p>
+        </div>
+
+        <div class="error-state hidden" id="errorState">
+          <span class="error-icon">!</span>
+          <h3>Something went wrong</h3>
+          <p id="errorMessage">Please try another image.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works">
+      <div><span class="mini-number">01</span><strong>Upload</strong><p>Choose any supported image.</p></div>
+      <span class="connector"></span>
+      <div><span class="mini-number">02</span><strong>Analyze</strong><p>MobileNetV2 extracts visual features.</p></div>
+      <span class="connector"></span>
+      <div><span class="mini-number">03</span><strong>Discover</strong><p>See the top matching labels.</p></div>
+    </section>
+  </main>
+
+  <footer><span>VISIONAI</span><span>BUILT WITH PYTHON + KERAS</span></footer>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
