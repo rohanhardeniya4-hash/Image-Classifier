@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # VisionAI — Image Classification Website
 
 A beginner-friendly image classification web app:
@@ -63,3 +64,4 @@ The first classification can take longer because MobileNetV2 may download its Im
 - It predicts the closest ImageNet labels; it does not learn from your uploaded images.
 - The confidence score is a model score, not a guarantee that the prediction is correct.
 - This starter app is intended for local learning/development. Add production security, upload limits, rate limiting, and deployment configuration before public hosting.
+=======
